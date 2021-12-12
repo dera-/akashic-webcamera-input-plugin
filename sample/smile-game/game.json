@@ -3,14 +3,44 @@
 	"height": 720,
 	"fps": 30,
 	"main": "./script/main.js",
+	"operationPlugins": [
+		{
+			"code": 10,
+			"script": "@dera-/akashic-webcamra-input-plugin",
+			"option": {
+				"cameraScreenScale": 0.25,
+				"cascades": [
+					"smile"
+				]
+			}
+		}
+	],
 	"assets": {
 		"main": {
 			"type": "script",
 			"path": "script/main.js",
 			"global": true
+		},
+		"none": {
+			"type": "image",
+			"path": "image/none.png",
+			"width": 1,
+			"height": 1
+		},
+		"smile": {
+			"type": "text",
+			"path": "text/smile.xml",
+			"global": true
 		}
 	},
-	"moduleMainScripts": {},
+	"globalScripts": [
+		"node_modules/@dera-/akashic-webcamra-input-plugin/lib/index.js",
+		"node_modules/@dera-/akashic-webcamra-input-plugin/externals/opencv.js",
+		"node_modules/@dera-/akashic-webcamra-input-plugin/externals/opencvUtils.js"
+	],
+	"moduleMainScripts": {
+		"@dera-/akashic-webcamra-input-plugin": "node_modules/@dera-/akashic-webcamra-input-plugin/lib/index.js"
+	},
 	"environment": {
 		"sandbox-runtime": "3"
 	}

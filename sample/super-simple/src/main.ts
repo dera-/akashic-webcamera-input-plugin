@@ -32,7 +32,10 @@ function main(param: g.GameMainParameterObject): void {
         });
 		scene.append(cameraScreenSprite);
 		if (g.game.operationPlugins[10]) {
-			g.game.operationPlugins[10].operationTrigger.add((e: g.OperationPluginOperation) => {
+			// プラグインインストール時に指定した数値(code)を指定
+			const plugin = g.game.operationPlugins[10];
+			plugin.operationTrigger.add((e: g.OperationPluginOperation) => {
+				// 物体の情報が送られてきたら、即この関数中の処理が実行される
 				const data = JSON.parse(e.data[0].toString());
 				if (data.name === "hand") {
 					const place = data.areas[0];
