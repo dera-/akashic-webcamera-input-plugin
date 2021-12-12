@@ -1,6 +1,5 @@
-import { Trigger } from "@akashic/trigger";
-const cv = require("../external_script/opencv");
-const cvUtils = require("../external_script/opencvUtils");
+const cv = require("../externals/opencv");
+const cvUtils = require("../externals/opencvUtils");
 
 interface CascadeData {
 	key: string;
@@ -25,7 +24,7 @@ const detectObjects = (src: any, cascade: any): any[] => {
     return objects;
 }
 
-const createSurfaceFromMat = (mat: any, width: number, height: number): g.Surface => {
+const createSurfaceFromMat = (game: g.Game, mat: any, width: number, height: number): g.Surface => {
     const img = new cv.Mat();
     const depth = mat.type() % 8;
     const scale = depth <= cv.CV_8S ? 1 : depth <= cv.CV_32S ? 1 / 256 : 255;
@@ -44,7 +43,7 @@ const createSurfaceFromMat = (mat: any, width: number, height: number): g.Surfac
             throw new Error("Bad number of channels (Source image must have 1, 3 or 4 channels)");
     }
     const imgData = new ImageData(new Uint8ClampedArray(img.data),img.cols,img.rows);
-    const surface = g.game.resourceFactory.createSurface(width, height);
+    const surface = game.resourceFactory.createSurface(width, height);
     const canv = document.createElement("canvas");
     canv.width = width;
     canv.height = height;
@@ -55,12 +54,10 @@ const createSurfaceFromMat = (mat: any, width: number, height: number): g.Surfac
 }
 
 class AkashicWebcameraInputPlugin implements g.OperationPlugin {
-	code: number;
-	operationTrigger: Trigger<g.OperationPluginOperation | (number | string)[]>;
+	operationTrigger: g.Trigger<g.OperationPluginOperation>;
 
 	private _game: g.Game;
 	private _view: g.OperationPluginView;
-	private _player: g.Player;
 	private _cameraScreenSize: g.CommonSize;
 	// Webカメラインターフェースの有効化フラグ
 	private _approved: boolean;
@@ -74,12 +71,10 @@ class AkashicWebcameraInputPlugin implements g.OperationPlugin {
 		return typeof window !== "undefined" && typeof document !== "undefined" && navigator.mediaDevices !== undefined;
 	}
 
-	constructor(game: g.Game, view: g.OperationPluginView, player: g.Player, code: number, option?: any) {
-		this.code = code;
-		this.operationTrigger = new Trigger<g.OperationEvent>();
+	constructor(game: g.Game, view: g.OperationPluginView, option?: any) {
+		this.operationTrigger = new g.Trigger<g.OperationPluginOperation>();
 		this._game = game;
 		this._view = view;
-		this._player = player;
 		this._approved = false;
 		this._cvUtils = new cvUtils("error");
 		if (option && option.cameraScreenScale) {
@@ -114,6 +109,10 @@ class AkashicWebcameraInputPlugin implements g.OperationPlugin {
 
 	getCameraScreenSurface(): g.Surface {
 		return this._cameraScreenSurface;
+	}
+
+	getCameraScreenSize(): g.CommonSize {
+		return this._cameraScreenSize;
 	}
 
 	private _initialize(): void {
@@ -155,14 +154,16 @@ class AkashicWebcameraInputPlugin implements g.OperationPlugin {
 						const point2 = new cv.Point(obj.x + obj.width, obj.y + obj.height);
 						cv.rectangle(this._matWebcamera, point1, point2, [255, 0, 0, 255]);
 						// xの位置だけ反転して通知
-						return { x: this._cameraScreenSize.width - obj.x, y: obj.y, width: obj.width, height: obj.height };
+						return { x: this._cameraScreenSize.width - obj.x- obj.width, y: obj.y, width: obj.width, height: obj.height };
 					});
 					if (areas.length > 0) {
-						this.operationTrigger.fire(new g.OperationEvent(this.code, { name: cascade.key, areas }, this._player));
+						const data = [JSON.stringify({ name: cascade.key, areas })]
+						this.operationTrigger.fire({ data, local: true });
 					}
 				});
 				cv.flip(this._matWebcamera, this._matWebcamera, 1);
 				this._cameraScreenSurface = createSurfaceFromMat(
+					this._game,
 					this._matWebcamera,
 					this._cameraScreenSize.width,
 					this._cameraScreenSize.height

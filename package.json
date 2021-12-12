@@ -1,18 +1,20 @@
 {
-  "name": "akashic-webcamra-input-plugin",
-  "private": true,
+  "name": "@dera-/akashic-webcamra-input-plugin",
   "version": "0.1.0",
   "description": "",
   "scripts": {
-    "postinstall": "npm run build",
-    "build": "rimraf ./script && tsc && akashic-cli-scan asset script",
-    "update": "akashic-cli-scan asset && akashic-cli-scan globalScripts",
+    "prepublish": "npm run clean && npm run build",
+    "clean": "rimraf lib",
+    "build": "tsc",
     "lint": "eslint -c .eslintrc.js \"src/**/*.ts\" --fix",
-    "start": "akashic-sandbox .",
-    "export-zip": "rimraf game.zip && akashic-cli-export zip -o game.zip -s",
-    "export-html": "rimraf game && akashic-cli-export html -o game",
     "test": "jest"
   },
+  "files": [
+    "lib",
+    "README.md",
+    "package.json",
+    "externals"
+  ],
   "author": "",
   "license": "",
   "devDependencies": {
@@ -28,7 +30,11 @@
     "ts-jest": "27.1.0",
     "typescript": "3.9.10"
   },
-  "dependencies": {
-    "@akashic/trigger": "^1.0.0"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dera-/akashic-hover-plugin.git"
+  },
+  "publishConfig": {
+    "@dera-:registry": "https://registry.npmjs.org/"
   }
 }

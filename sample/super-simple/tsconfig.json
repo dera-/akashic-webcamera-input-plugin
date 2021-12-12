@@ -1,11 +1,11 @@
 {
   "compilerOptions": {
     "target": "ES5",
-    "lib": ["es5", "dom"],
+    "lib": ["es5"],
     "noImplicitAny": true,
     "module": "commonjs" ,
-    "outDir": "lib",
-    "types" : ["node"],
+    "outDir": "script",
+    "types" : [],
     "allowUmdGlobalAccess": true,
     "noImplicitUseStrict": true
   },
