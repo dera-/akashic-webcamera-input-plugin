@@ -1,7 +1,7 @@
 {
   "name": "@dera-/akashic-webcamra-input-plugin",
   "version": "0.1.0",
-  "description": "",
+  "description": "AkshicEngine用のWEBカメラ入力インターフェースプラグイン",
   "scripts": {
     "prepublish": "npm run clean && npm run build",
     "clean": "rimraf lib",
@@ -15,7 +15,7 @@
     "package.json",
     "externals"
   ],
-  "author": "",
+  "author": "dera-",
   "license": "",
   "devDependencies": {
     "@akashic/akashic-engine": "~3.2.0",
