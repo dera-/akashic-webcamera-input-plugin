@@ -1,6 +1,6 @@
 {
-  "name": "@dera-/akashic-webcamra-input-plugin",
-  "version": "0.1.0",
+  "name": "@dera-/akashic-webcamera-input-plugin",
+  "version": "0.1.1",
   "description": "AkshicEngine用のWEBカメラ入力インターフェースプラグイン",
   "scripts": {
     "prepublish": "npm run clean && npm run build",
@@ -32,7 +32,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/dera-/akashic-hover-plugin.git"
+    "url": "https://github.com/dera-/akashic-webcamera-input-plugin.git"
   },
   "publishConfig": {
     "@dera-:registry": "https://registry.npmjs.org/"

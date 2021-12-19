@@ -10,47 +10,47 @@ interface CascadeData {
 const DEFAUTLT_CAMERA_SCREEN_SCALE = 0.125;
 
 const detectObjects = (src: any, cascade: any): any[] => {
-    const gray = new cv.Mat();
-    cv.cvtColor(src, gray, cv.COLOR_RGBA2GRAY, 0);
-    const hands = new cv.RectVector();
-    const msize = new cv.Size(0, 0);
-    cascade.detectMultiScale(gray, hands, 1.1, 3, 0, msize, msize);
-    const objects = [];
-    for (var i = 0; i < hands.size(); ++i) {
-        objects.push(hands.get(i));
-    }
-    gray.delete();
-    hands.delete();
-    return objects;
+	const gray = new cv.Mat();
+	cv.cvtColor(src, gray, cv.COLOR_RGBA2GRAY, 0);
+	const hands = new cv.RectVector();
+	const msize = new cv.Size(0, 0);
+	cascade.detectMultiScale(gray, hands, 1.1, 3, 0, msize, msize);
+	const objects = [];
+	for (var i = 0; i < hands.size(); ++i) {
+		objects.push(hands.get(i));
+	}
+	gray.delete();
+	hands.delete();
+	return objects;
 }
 
 const createSurfaceFromMat = (game: g.Game, mat: any, width: number, height: number): g.Surface => {
-    const img = new cv.Mat();
-    const depth = mat.type() % 8;
-    const scale = depth <= cv.CV_8S ? 1 : depth <= cv.CV_32S ? 1 / 256 : 255;
-    const shift = depth === cv.CV_8S || depth === cv.CV_16S ? 128 : 0;
-    mat.convertTo(img, cv.CV_8U, scale, shift);
-    switch (img.type()) {
-        case cv.CV_8UC1:
-            cv.cvtColor(img, img, cv.COLOR_GRAY2RGBA);
-            break;
-        case cv.CV_8UC3:
-            cv.cvtColor(img, img, cv.COLOR_RGB2RGBA);
-            break;
-        case cv.CV_8UC4:
-            break;
-        default:
-            throw new Error("Bad number of channels (Source image must have 1, 3 or 4 channels)");
-    }
-    const imgData = new ImageData(new Uint8ClampedArray(img.data),img.cols,img.rows);
-    const surface = game.resourceFactory.createSurface(width, height);
-    const canv = document.createElement("canvas");
-    canv.width = width;
-    canv.height = height;
-    const ct = canv.getContext("2d");
-    ct.putImageData(imgData, 0, 0);
-    surface._drawable = canv;
-    return surface;
+	const img = new cv.Mat();
+	const depth = mat.type() % 8;
+	const scale = depth <= cv.CV_8S ? 1 : depth <= cv.CV_32S ? 1 / 256 : 255;
+	const shift = depth === cv.CV_8S || depth === cv.CV_16S ? 128 : 0;
+	mat.convertTo(img, cv.CV_8U, scale, shift);
+	switch (img.type()) {
+		case cv.CV_8UC1:
+			cv.cvtColor(img, img, cv.COLOR_GRAY2RGBA);
+			break;
+		case cv.CV_8UC3:
+			cv.cvtColor(img, img, cv.COLOR_RGB2RGBA);
+			break;
+		case cv.CV_8UC4:
+			break;
+		default:
+			throw new Error("Bad number of channels (Source image must have 1, 3 or 4 channels)");
+	}
+	const imgData = new ImageData(new Uint8ClampedArray(img.data),img.cols,img.rows);
+	const surface = game.resourceFactory.createSurface(width, height);
+	const canv = document.createElement("canvas");
+	canv.width = width;
+	canv.height = height;
+	const ct = canv.getContext("2d");
+	ct.putImageData(imgData, 0, 0);
+	surface._drawable = canv;
+	return surface;
 }
 
 class AkashicWebcameraInputPlugin implements g.OperationPlugin {
@@ -127,9 +127,9 @@ class AkashicWebcameraInputPlugin implements g.OperationPlugin {
 		}).then(() => {
 			// opencv.jsのwasmが読み込まれてから初期化処理
 			videoElem = document.createElement("video");
-            videoElem.width = this._cameraScreenSize.width;
-            videoElem.height = this._cameraScreenSize.height;
-            this._videoCapture = new cv.VideoCapture(videoElem);
+			videoElem.width = this._cameraScreenSize.width;
+			videoElem.height = this._cameraScreenSize.height;
+			this._videoCapture = new cv.VideoCapture(videoElem);
 			this._cascades.forEach(cascade => {
 				cascade.classifier = new cv.CascadeClassifier();
 				this._cvUtils.createFileFromUrl(`${cascade.key}.xml`, cascade.filePath, () => {

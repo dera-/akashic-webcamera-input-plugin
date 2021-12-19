@@ -33,6 +33,6 @@
     "typescript": "3.9.10"
   },
   "dependencies": {
-    "@dera-/akashic-webcamra-input-plugin": "file:../../dera--akashic-webcamra-input-plugin-0.1.0.tgz"
+    "@dera-/akashic-webcamera-input-plugin": "^0.1.1"
   }
 }

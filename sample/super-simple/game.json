@@ -6,7 +6,7 @@
 	"operationPlugins": [
 		{
 			"code": 10,
-			"script": "@dera-/akashic-webcamra-input-plugin",
+			"script": "./node_modules/@dera-/akashic-webcamra-input-plugin/lib/index.js",
 			"option": {
 				"cascades": [
 					"hand"
@@ -55,9 +55,6 @@
 		"node_modules/@dera-/akashic-webcamra-input-plugin/externals/opencv.js",
 		"node_modules/@dera-/akashic-webcamra-input-plugin/externals/opencvUtils.js"
 	],
-	"moduleMainScripts": {
-		"@dera-/akashic-webcamra-input-plugin": "node_modules/@dera-/akashic-webcamra-input-plugin/lib/index.js"
-	},
 	"environment": {
 		"sandbox-runtime": "3"
 	}
