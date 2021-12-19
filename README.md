@@ -35,14 +35,14 @@ npm install --save-dev @dera-/akashic-webcamera-input-plugin
 +	"operationPlugins": [
 +		{
 +			"code": 10,
-+			"script": "./node_modules/@dera-/akashic-webcamra-input-plugin/lib/index.js",
++			"script": "./node_modules/@dera-/akashic-webcamera-input-plugin/lib/index.js",
 +		}
 +	],
 	"globalScripts": [
 		...,
-+		"node_modules/@dera-/akashic-webcamra-input-plugin/lib/index.js",
-+		"node_modules/@dera-/akashic-webcamra-input-plugin/externals/opencv.js",
-+		"node_modules/@dera-/akashic-webcamra-input-plugin/externals/opencvUtils.js"
++		"node_modules/@dera-/akashic-webcamera-input-plugin/lib/index.js",
++		"node_modules/@dera-/akashic-webcamera-input-plugin/externals/opencv.js",
++		"node_modules/@dera-/akashic-webcamera-input-plugin/externals/opencvUtils.js"
 	],
 	...
 }
@@ -65,7 +65,7 @@ npm install --save-dev @dera-/akashic-webcamera-input-plugin
 	"operationPlugins": [
 		{
 			"code": 10,
-			"script": "./node_modules/@dera-/akashic-webcamra-input-plugin/lib/index.js",
+			"script": "./node_modules/@dera-/akashic-webcamera-input-plugin/lib/index.js",
 +			"option": {
 +				"cascades": [
 +					"hand" // 利用する識別器をアセットIDで指定
