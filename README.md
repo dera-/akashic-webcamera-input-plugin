@@ -41,8 +41,8 @@ npm install --save-dev @dera-/akashic-webcamera-input-plugin
 	"globalScripts": [
 		...,
 +		"node_modules/@dera-/akashic-webcamera-input-plugin/lib/index.js",
-+		"node_modules/@dera-/akashic-webcamera-input-plugin/externals/opencv.js",
-+		"node_modules/@dera-/akashic-webcamera-input-plugin/externals/opencvUtils.js"
++		"node_modules/@dera-/akashic-webcamera-input-plugin/lib/opencv.js",
++		"node_modules/@dera-/akashic-webcamera-input-plugin/lib/opencvUtils.js"
 	],
 	...
 }

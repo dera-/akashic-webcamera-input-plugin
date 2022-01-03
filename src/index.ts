@@ -1,5 +1,5 @@
-const cv = require("../externals/opencv");
-const cvUtils = require("../externals/opencvUtils");
+const cv = require("./opencv");
+const cvUtils = require("./opencvUtils");
 
 interface CascadeData {
 	key: string;

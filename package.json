@@ -1,19 +1,19 @@
 {
   "name": "@dera-/akashic-webcamera-input-plugin",
-  "version": "0.1.1",
+  "version": "1.0.0",
   "description": "AkshicEngine用のWEBカメラ入力インターフェースプラグイン",
+  "main": "lib/index.js",
   "scripts": {
     "prepublish": "npm run clean && npm run build",
     "clean": "rimraf lib",
-    "build": "tsc",
+    "build": "tsc && cpx externals/**/*.js lib/",
     "lint": "eslint -c .eslintrc.js \"src/**/*.ts\" --fix",
     "test": "jest"
   },
   "files": [
     "lib",
     "README.md",
-    "package.json",
-    "externals"
+    "package.json"
   ],
   "author": "dera-",
   "license": "",
@@ -23,6 +23,7 @@
     "@types/node": "^14.17.21",
     "@typescript-eslint/eslint-plugin": "5.6.0",
     "@typescript-eslint/parser": "5.6.0",
+    "cpx": "^1.5.0",
     "eslint": "8.4.1",
     "eslint-plugin-import": "2.25.3",
     "jest": "27.4.3",
