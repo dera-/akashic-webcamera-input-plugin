@@ -12,9 +12,9 @@ function main(param: g.GameMainParameterObject): void {
 		const scoreLabel = new g.Label({
 			scene: scene,
 			font: font,
-			fontSize: 24,
-			x: 0.4 * g.game.width,
-			y: 0.1 * g.game.height,
+			fontSize: 32,
+			x: 0.425 * g.game.width,
+			y: 0.15 * g.game.height,
 			text: `SCORE:${score}`
 		});
 		scene.append(scoreLabel);
@@ -22,8 +22,8 @@ function main(param: g.GameMainParameterObject): void {
 			scene: scene,
 			font: font,
 			fontSize: 32,
-			x: 0.35 * g.game.width,
-			y: 0.85 * g.game.height,
+			x: 0.39 * g.game.width,
+			y: 0.55 * g.game.height,
 			text: "笑顔になりましょう"
 		});
 		scene.append(discriptionLabel);
@@ -38,7 +38,7 @@ function main(param: g.GameMainParameterObject): void {
 				width: g.game.width / 4,
 				height: g.game.height / 4,
 				x: g.game.width / 2 - g.game.width / 8,
-				y: g.game.height / 2 - g.game.height / 8
+				y: g.game.height / 2 - g.game.height / 8 - 0.12 * g.game.height
 			});
 			scene.append(cameraScreenSprite);
 			// プラグインインストール時に指定した数値(code)を指定
